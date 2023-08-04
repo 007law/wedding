@@ -13,16 +13,98 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <!-- All css here -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
 
-    
+    <!-- All js here -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <body>
-        <div class="row">
-            <p>Welcome to my wedding!</p>
+        <input type="hidden" name="guestName"/>
+        
+        <div class="page_1 d-flex p-2">
+            <img class="img-thumbnail" src="images/image_001.JPG">
+        </div>
+        <div class="page_2 d-flex p-2 d-none">
+            <!-- <div class="col-md-12">
+                <h3>e-Invitation to Thomas & Suki Wedding</h3>
+            </div>
+            <br/> -->
+            <div class="col-md-6">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th><h3>e-Invitation to Thomas & Suki Wedding</h3></th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>Venue</td>
+                        <td>:</td>
+                        <td>Moon Palace @ Puchong</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>:</td>
+                        <td>17/12/2023 (Sunday)</td>
+                    </tr>
+                    <tr>
+                        <td>Time</td>
+                        <td>:</td>
+                        <td>12:00pm (Don't be late ya :D)</td>
+                    </tr>
+               </table>
+            </div>
+           
+        </div>
+        <div class="page_3 d-flex p-2 d-none">
+            <table class="table">
+                <tr>
+                    <td>Thomas Law here</td>
+                </tr>
+           </table>
         </div>
     </body>
+    <script>
+        Swal.fire({
+        input: 'text',
+        inputLabel: 'Welcome, may I know what is your name?',
+        inputPlaceholder: 'Type your name here...',
+        inputAttributes: {
+            'aria-label': 'Type your name here'
+        },
+        showCancelButton: true
+        }).then((result)=>{
+            if (result.isConfirmed) {
+                $('input[name="guestName"]').val(result.value)
+                Swal.fire({
+                title: 'Good day to you, '+result.value,
+                html: 'Loading in <b></b> milliseconds.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                    $('.page_1').addClass('d-none')
+                    $('.page_2').removeClass('d-none')
+                }
+                })
+            }
+        })
+
+    </script>
     </html>
