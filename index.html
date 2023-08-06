@@ -15,12 +15,13 @@
     <meta name="author" content="">
     <!-- All css here -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
     <!-- All js here -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <body>
         <input type="hidden" name="guestName"/>
         
@@ -41,7 +42,7 @@
                             <th>&nbsp;</th>
                         </tr>
                         <tr>
-                            <th colspan="3"><h3>e-Invitation to Thomas & Suki Wedding</h3></th>
+                            <th colspan="3"><h3>Welcome to Wedding of Thomas & Suki</h3></th>
                         </tr>
                     </thead>
                     <tr>
@@ -60,15 +61,22 @@
                         <td>12:00pm (Don't be late ya :D)</td>
                     </tr>
                </table>
+               <div class="text-center">
+                <input type="button" class="btn btn-outline-primary" readonly value="Show me photos 📂" id="btnShowPhotos"/>
+               </div>
+               
             </div>
            
         </div>
-        <div class="page_3 d-flex  justify-content-center p-2 d-none">
-            <table class="table">
-                <tr>
-                    <td>Thomas Law here</td>
-                </tr>
-           </table>
+        <div class="page_3 d-flex justify-content-center p-2 d-none">
+            <div class="col-md-6">
+                <div class="images">
+                    <!-- <div class="d-flex justify-content-center"><img class="img-fluid" src="images/image_080.JPG" style="height: 600px;" id="imgHolder_1"></div>
+                    <div class="d-flex justify-content-center"><img class="img-fluid" src="images/image_002.JPG" style="height: 600px;" id="imgHolder_2"></div>
+                    <div class="d-flex justify-content-center"><img class="img-fluid" src="images/image_003.JPG" style="height: 600px;" id="imgHolder_3"></div> -->
+                </div>
+            </div>
+          
         </div>
     </body>
     <script>
@@ -108,6 +116,44 @@
                 })
             }
         })
+
+        $('#btnShowPhotos').on('click', function(){
+            var imageIndex = 0
+            //('000'+imageIndex).slice(-3)
+            for (let i = 0; i < 91; i++) {
+                imageIndex = (i + 1)
+                $('.images').append("<div class=\"d-flex justify-content-center\"><img class=\"img-fluid\" src=\"images/image_"+('000'+imageIndex).slice(-3)+".JPG\" style=\"height: 600px;\" id=\"imgHolder_1\"></div>" );
+            }
+            
+
+            $('.page_2').addClass('d-none')
+            $('.page_3').removeClass('d-none')
+            // var imagePath = 'images/image_080.JPG'
+
+            $('.images').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                adaptiveHeight: true,
+                mobileFirst: true,
+                prevArrow: '<button type="button" class="btn btn-outline-warning d-none">Previous</button>',
+                nextArrow: '<button type="button" class="btn btn-outline-success d-none">Next</button>'
+            });
+
+
+            // var tid = setTimeout(loadNextBatchImage, 2000);
+            // function loadNextBatchImage(){
+            //     tid = setTimeout(loadNextBatchImage, 2000); // repeat myself
+            //     console.log('Loading timer again')
+            // }
+
+            // function abortTimer() { // to be called when you want to stop the timer
+            //     clearTimeout(tid);
+            // }
+        })
+        
+
 
     </script>
     </html>
